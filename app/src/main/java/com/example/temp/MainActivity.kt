@@ -11,7 +11,7 @@ import com.example.temp.repository.Repository
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
-
+    private val TAG = MainActivity::class.java.simpleName
     private lateinit var viewModel: MainViewModel
     private lateinit var weatherAdapter: RecyclerViewAdapter
 
@@ -27,6 +27,7 @@ class MainActivity : AppCompatActivity() {
         val repository = Repository()
         val viewModelFactory = MainViewModelFactory(repository)
         viewModel = ViewModelProvider(this, viewModelFactory).get(MainViewModel::class.java)
+        // TODO: arrange with enums
         viewModel.getPost("aquarius")
         viewModel.getPost("pisces")
         viewModel.getPost("aries")
@@ -41,19 +42,17 @@ class MainActivity : AppCompatActivity() {
         viewModel.getPost("capricorn")
         viewModel.response.observe(this, Observer {
             if(it.isSuccessful) {
-                Log.i("MainActivity", "successful ${it.body()?.sunsign}")
+                Log.i(TAG, "successful ${it.body()?.sunsign}")
                 addRecyclerViewData(it.body()!!)
             } else {
-                Log.i("MainActivity", "unsuccessful")
+                Log.i(TAG, "unsuccessful")
             }
         })
     }
 
     private fun initRecyclerView() {
-        recyclerView.apply {
-            weatherAdapter = RecyclerViewAdapter()
-            adapter = weatherAdapter
-        }
+        weatherAdapter = RecyclerViewAdapter()
+        recyclerView.adapter = weatherAdapter
     }
 
     private fun addRecyclerViewData(horoscope: Horoscope) {

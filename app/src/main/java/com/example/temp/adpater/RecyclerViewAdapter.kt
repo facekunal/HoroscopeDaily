@@ -1,6 +1,5 @@
 package com.example.temp.adpater
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,7 +10,7 @@ import kotlinx.android.synthetic.main.item_horoscope.view.*
 
 class RecyclerViewAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    private var items: ArrayList<Horoscope> = ArrayList(20)
+    private var items: ArrayList<Horoscope> = ArrayList(12)
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return WeatherViewHolder(
             LayoutInflater.from(parent.context).inflate(R.layout.item_horoscope, parent, false)
@@ -38,7 +37,6 @@ class RecyclerViewAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     class WeatherViewHolder(
         itemView: View
     ): RecyclerView.ViewHolder(itemView) {
-        //val date = itemView.date
         val horoscopeText = itemView.horoscopeText
         val sunsign = itemView.sunsignText
 
